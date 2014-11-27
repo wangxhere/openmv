@@ -44,8 +44,8 @@ ENTRY(Reset_Handler)
 #define CCM_ORIGIN      0x10000000
 #define CCM_LENGTH      64K
 
-#define SDRAM_ORIGIN    0xC0000000
-#define SDRAM_LENGTH    15M
+#define SDRAM_ORIGIN    0xD0000000
+#define SDRAM_LENGTH    8M
 #endif //OPENMV1
 
 /* Specify the memory areas */
@@ -70,9 +70,9 @@ _stack_size = 0x1000;       /* required amount of stack */
 _heap_size  = 0XB400;       /* required amount of heap */
 #else
 
-_fb_base    = 0xC0F04000;   /* sdram_start + head_end + cache */
+_fb_base    = 0xD0404000;   /* sdram_start + heap_end + cache */
 _stack_size = 0x4000;       /* required amount of stack */
-_heap_size  = 0x00F00000;   /* required amount of heap */
+_heap_size  = 0x00400000;   /* required amount of heap */
 _cache_size = 0x4000;       /* required amount of cache */
 _heap_end   = ORIGIN(SDRAM) + _heap_size;
 
@@ -86,13 +86,6 @@ SECTIONS
   {
     . = ALIGN(4);
     KEEP(*(.isr_vector)) /* Startup code */
-    . = ALIGN(4);
-    */ff.o(.text*)
-    */ccsbcs.o(.text*)
-    */stm32f4xx_hal.o(.text*)
-    */stm32f4xx_hal_msp.o(.text*)
-    */stm32f4xx_hal_spi.o(.text*)
-    */stm32f4xx_ll_usb.o(.text*)
     . = ALIGN(4);
   } >FLASH_ISR
 

@@ -545,11 +545,11 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-#else// 180MHz/48MHz
-  RCC_OscInitStruct.PLL.PLLM = 6;
-  RCC_OscInitStruct.PLL.PLLN = 360;
-  RCC_OscInitStruct.PLL.PLLQ = 15;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
+#else// 180MHz/48MHz --> 168M / 48Ma
+  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLN = 336;
+  RCC_OscInitStruct.PLL.PLLQ = 7;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
 #endif //STM32F407xx
   if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
     /* Initialization Error */

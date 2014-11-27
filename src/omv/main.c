@@ -144,6 +144,8 @@ void __attribute__((weak))
     (void)func;
     printf("Assertion '%s' failed, at file %s:%d\n", expr, file, line);
     __fatal_error("");
+
+    while (1);
 }
 #endif
 
@@ -359,6 +361,7 @@ soft_reset:
         pyb_usb_dev_init(USB_DEVICE_MODE_CDC_MSC, usb_medium);
     }
 
+#if 0
     // Run the main script from the current directory.
     if (reset_mode == 1 && pyexec_mode_kind == PYEXEC_MODE_FRIENDLY_REPL) {
         FRESULT res = f_stat("main.py", NULL);
@@ -372,6 +375,7 @@ soft_reset:
             }
         }
     }
+#endif /* 0 */
 
     // Enter REPL
     nlr_buf_t nlr;

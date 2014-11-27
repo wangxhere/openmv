@@ -203,6 +203,9 @@ int sensor_init()
         systick_sleep(10);
     }
 
+    /* select device control register to set 01 */
+    SCCB_Write(0xFF, 0x01);
+
     /* Read the sensor information */
     sensor.id.MIDH = SCCB_Read(REG_MIDH);
     sensor.id.MIDL = SCCB_Read(REG_MIDL);

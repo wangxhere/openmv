@@ -21,6 +21,8 @@ static SD_HandleTypeDef SDHandle;
 
 bool sdcard_is_present(void)
 {
+	// not using SD card now
+	return false;
     // CD is not connected on R1
     return true;
 }

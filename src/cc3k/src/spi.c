@@ -141,7 +141,7 @@ void SpiOpen(gcSpiHandleRx pfRxHandler)
     uint8_t buf[1];
     HAL_SPI_Receive(&SPIHandle, buf, sizeof(buf), SPI_TIMEOUT);
 
-    gpio_init_exti(&gpio_pins[GPIO_PB11], (mp_obj_t)&wlan_irq_callback_obj, 5, 0);
+    gpio_init_exti(&gpio_pins[GPIO_PF11], (mp_obj_t)&wlan_irq_callback_obj, 5, 0);
     HAL_Delay(500);
     tSLInformation.WlanInterruptEnable();
 }

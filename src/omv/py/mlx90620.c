@@ -253,10 +253,9 @@ const mp_obj_module_t mlx_module = {
     .base = { &mp_type_module },
     .name = MP_QSTR_mlx,
 };
+#endif
 
 const mp_obj_module_t *py_mlx90620_init()
 {
     return &mlx_module;
 }
-
-#endif
