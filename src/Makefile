@@ -1,6 +1,3 @@
-# Debug Switch
-DEBUG=1
-
 BIN     = openmv
 CC      = arm-none-eabi-gcc
 AS      = arm-none-eabi-as
