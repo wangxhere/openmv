@@ -556,12 +556,15 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 
+#if 1
 #ifdef STM32F429xx
   if(HAL_PWREx_ActivateOverDrive() != HAL_OK) {
     /* Initialization Error */
     Error_Handler();
   }
 #endif
+#endif
+
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);

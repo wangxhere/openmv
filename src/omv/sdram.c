@@ -15,7 +15,7 @@
 #include "sdram.h"
 
 #define SDRAM_TIMEOUT       ((uint32_t)0xFFFF)
-#define REFRESH_COUNT       ((uint32_t)0x0569)   /* SDRAM refresh counter (90Mhz SD clock) */
+#define REFRESH_COUNT       ((uint32_t)856)   /* SDRAM refresh counter (84Mhz SD clock) */
 #define SDRAM_MODEREG_BURST_LENGTH_1             ((uint16_t)0x0000)
 #define SDRAM_MODEREG_BURST_LENGTH_2             ((uint16_t)0x0001)
 #define SDRAM_MODEREG_BURST_LENGTH_4             ((uint16_t)0x0002)
@@ -40,21 +40,21 @@ bool sdram_init() {
 	/* SDRAM device configuration */
 	hsdram.Instance = FMC_SDRAM_DEVICE;
 
-	/* Timing configuration for 90 Mhz of SD clock frequency (180Mhz/2) */
+	/* Timing configuration for 56 Mhz of SD clock frequency (168Mhz/3) */
 	/* TMRD: 2 Clock cycles */
 	SDRAM_Timing.LoadToActiveDelay = 2;
-	/* TXSR: min=70ns (6x11.90ns) */
-	SDRAM_Timing.ExitSelfRefreshDelay = 7;
-	/* TRAS: min=42ns (4x11.90ns) max=120k (ns) */
-	SDRAM_Timing.SelfRefreshTime = 4;
-	/* TRC:  min=63 (6x11.90ns) */
-	SDRAM_Timing.RowCycleDelay = 7;
+	/* TXSR: min=70ns (6x11.90ns) (4*17.90ns) */
+	SDRAM_Timing.ExitSelfRefreshDelay = 4;
+	/* TRAS: min=42ns (4x11.90ns) (3*17.90ns) max=120k (ns) */
+	SDRAM_Timing.SelfRefreshTime = 3;
+	/* TRC:  min=63 (6x11.90ns) (4*17.90ns) */
+	SDRAM_Timing.RowCycleDelay = 4;
 	/* TWR:  2 Clock cycles */
 	SDRAM_Timing.WriteRecoveryTime = 2;
-	/* TRP:  15ns => 2x11.90ns */
-	SDRAM_Timing.RPDelay = 2;
-	/* TRCD: 15ns => 2x11.90ns */
-	SDRAM_Timing.RCDDelay = 2;
+	/* TRP:  15ns => 2x11.90ns 1*17.90ns */
+	SDRAM_Timing.RPDelay = 1;
+	/* TRCD: 15ns => 2x11.90ns 1*17.90ns */
+	SDRAM_Timing.RCDDelay = 1;
 
 	hsdram.Init.SDBank = FMC_SDRAM_BANK2;
 	hsdram.Init.ColumnBitsNumber = FMC_SDRAM_COLUMN_BITS_NUM_8;
@@ -76,7 +76,7 @@ bool sdram_init() {
 	/* Program the SDRAM external device */
 	SDRAM_Initialization_Sequence(&hsdram, &command);
 
-	//sdram_test();
+//	sdram_test();
 
 	return true;
 }

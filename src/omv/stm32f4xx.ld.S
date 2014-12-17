@@ -10,6 +10,9 @@
 /* Entry Point */
 ENTRY(Reset_Handler)
 
+/* WX: Debug SDRAM */
+#define DBG_SDRAM
+
 #ifdef OPENMV1
 #define HEAP_MEMORY     CCM
 #define FLASH_ORIGIN    0x08000000
@@ -28,7 +31,11 @@ ENTRY(Reset_Handler)
 #define CCM_LENGTH      64K
 
 #else
+#ifdef DBG_SDRAM
+#define HEAP_MEMORY     RAM
+#else
 #define HEAP_MEMORY     SDRAM
+#endif
 #define FLASH_ORIGIN    0x08000000
 #define FLASH_LENGTH    2048K
 
@@ -70,11 +77,23 @@ _stack_size = 0x1000;       /* required amount of stack */
 _heap_size  = 0XB400;       /* required amount of heap */
 #else
 
-_fb_base    = 0xD0404000;   /* sdram_start + heap_end + cache */
+#ifdef DBG_SDRAM	/* WX: Debug SDRAM */
+
+_stack_size = 0x1000;
+_heap_size = 0x10000;
+_cache_size = 0x4000;
+_heap_end = ORIGIN(HEAP_MEMORY) + _heap_size;
+_fb_base = _heap_end + _cache_size;
+
+#else	/* WX: Debug SDRAM */
+
 _stack_size = 0x4000;       /* required amount of stack */
 _heap_size  = 0x00400000;   /* required amount of heap */
 _cache_size = 0x4000;       /* required amount of cache */
 _heap_end   = ORIGIN(SDRAM) + _heap_size;
+_fb_base    = _heap_end + _cache_size;   /* sdram_start + heap_end + cache */
+
+#endif		/* WX: Debug SDRAM */
 
 #endif
 

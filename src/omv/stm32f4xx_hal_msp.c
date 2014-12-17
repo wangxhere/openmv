@@ -89,22 +89,25 @@ void HAL_MspInit(void) {
 	GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
 	for (int i = 0; i < NUM_LED_PINS; i++) {
 		HAL_GPIO_WritePin(led_pins[i].port, led_pins[i].pin, GPIO_PIN_SET);
+#if 0
 #ifdef OPENMV2
 		if (led_pins[i].pin == LED_IR_PIN) { //IR LED is inverted
 			HAL_GPIO_WritePin(led_pins[i].port, led_pins[i].pin,
 					GPIO_PIN_RESET);
 		}
 #endif
+#endif
 		GPIO_InitStructure.Pin = led_pins[i].pin;
 		HAL_GPIO_Init(led_pins[i].port, &GPIO_InitStructure);
 	}
-
+#if 0
 	/* Configure SD CD PIN */
 	GPIO_InitStructure.Pin = SD_CD_PIN;
 	GPIO_InitStructure.Pull = GPIO_NOPULL;
 	GPIO_InitStructure.Speed = GPIO_SPEED_LOW;
 	GPIO_InitStructure.Mode = GPIO_MODE_INPUT;
 	HAL_GPIO_Init(SD_CD_PORT, &GPIO_InitStructure);
+#endif
 }
 
 void HAL_I2C_MspInit(I2C_HandleTypeDef *hi2c) {
