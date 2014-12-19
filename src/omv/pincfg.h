@@ -264,8 +264,8 @@ typedef enum {
 #define DCMI_TIM_CLK_ENABLE()   __TIM1_CLK_ENABLE()
 #define DCMI_TIM_CLK_DISABLE()  __TIM1_CLK_DISABLE()
 
-#define DCMI_RESET_PIN          (GPIO_PIN_15)	/* unused */
-#define DCMI_RESET_PORT         (GPIOA)
+#define DCMI_RESET_PIN          (GPIO_PIN_9)
+#define DCMI_RESET_PORT         (GPIOG)
 
 #define DCMI_PWDN_PIN           (GPIO_PIN_10)
 #define DCMI_PWDN_PORT          (GPIOG)

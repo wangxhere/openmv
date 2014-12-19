@@ -200,8 +200,15 @@ OBJ += $(addprefix $(BUILD)/$(MICROPY_DIR)/,\
 	file.o                  \
 	rtc.o                   \
 	pin.o                   \
+	pin_named_pins.o		\
+	pins_OPENMV2.o			\
+	pin_defs_stmhal.o		\
 	timer.o                 \
 	servo.o                 \
+	modpyb.o				\
+	uart.o					\
+	irq.o					\
+	systick.o				\
     )
 
 OBJ += $(addprefix $(BUILD)/$(MICROPY_DIR)/lib/libm/,\

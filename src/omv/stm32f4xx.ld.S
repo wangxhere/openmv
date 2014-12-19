@@ -80,7 +80,7 @@ _heap_size  = 0XB400;       /* required amount of heap */
 #ifdef DBG_SDRAM	/* WX: Debug SDRAM */
 
 _stack_size = 0x1000;
-_heap_size = 0x10000;
+_heap_size = 0x12000;
 _cache_size = 0x4000;
 _heap_end = ORIGIN(HEAP_MEMORY) + _heap_size;
 _fb_base = _heap_end + _cache_size;
