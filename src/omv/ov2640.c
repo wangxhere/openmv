@@ -28,7 +28,7 @@ static const uint8_t default_regs[][2] = {
     { BANK_SEL, BANK_SEL_SENSOR },
     { 0x3c,     0x32 },
     { CLKRC,    0x80 }, /* Set PCLK divider */
-    { COM2,     COM2_OUT_DRIVE_3x }, /* Output drive x2 */
+    { COM2,     COM2_OUT_DRIVE_4x }, /* Output drive x4 */
 #ifdef OPENMV2
     { REG04,    0xF8}, /* Mirror/VFLIP/AEC[1:0] */
 #else
@@ -105,7 +105,8 @@ static const uint8_t default_regs[][2] = {
     { 0x88,     0x3f },
     { 0xd7,     0x03 },
     { 0xd9,     0x10 },
-    { R_DVP_SP , R_DVP_SP_AUTO_MODE | 0x2 },
+//    { R_DVP_SP , R_DVP_SP_AUTO_MODE | 0x2 },
+	{ R_DVP_SP , 0x02 },
     { 0xc8,     0x08 },
     { 0xc9,     0x80 },
     { BPADDR,   0x00 },
@@ -259,7 +260,8 @@ static const uint8_t svga_regs[][2] = {
         /* H_DIVIDER/V_DIVIDER */
         { CTRLI,   CTRLI_LP_DP | 0x00},
         /* DVP prescalar */
-        { R_DVP_SP, R_DVP_SP_AUTO_MODE},
+//        { R_DVP_SP, R_DVP_SP_AUTO_MODE | 0x02},
+		{ R_DVP_SP, 0x02},
 
         { R_BYPASS, R_BYPASS_DSP_EN },
         { RESET,    0x00 },
@@ -316,7 +318,8 @@ static const uint8_t uxga_regs[][2] = {
         /* H_DIVIDER/V_DIVIDER */
         { CTRLI,   CTRLI_LP_DP | 0x00},
         /* DVP prescalar */
-        { R_DVP_SP, R_DVP_SP_AUTO_MODE | 0x04},
+//        { R_DVP_SP, R_DVP_SP_AUTO_MODE | 0x04},
+		{ R_DVP_SP, 0x04},
 
         { R_BYPASS, R_BYPASS_DSP_EN },
         { RESET,    0x00 },

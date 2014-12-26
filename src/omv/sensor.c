@@ -106,7 +106,7 @@ static int dcmi_config()
     DCMIHandle.Init.SynchroMode = DCMI_SYNCHRO_HARDWARE;    /* Enable Hardware synchronization      */
     DCMIHandle.Init.CaptureRate = DCMI_CR_ALL_FRAME;        /* Capture rate all frames              */
     DCMIHandle.Init.ExtendedDataMode = DCMI_EXTEND_DATA_8B; /* Capture 8 bits on every pixel clock  */
-    DCMIHandle.Init.JPEGMode = DCMI_JPEG_DISABLE;           /* Disable JPEG Mode                    */
+    DCMIHandle.Init.JPEGMode = DCMI_JPEG_DISABLE;           /* Enable JPEG Mode                    */
 
     /* Associate the DMA handle to the DCMI handle */
     __HAL_LINKDMA(&DCMIHandle, DMA_Handle, DMAHandle);
