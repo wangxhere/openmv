@@ -66,6 +66,8 @@ void HAL_MspInit(void) {
 #ifdef OPENMV2
 	__GPIOF_CLK_ENABLE();
 	__GPIOG_CLK_ENABLE();
+	__GPIOH_CLK_ENABLE();
+	__GPIOI_CLK_ENABLE();
 #endif
 
 	/* Enable DMA clocks */
@@ -298,6 +300,7 @@ void HAL_SDRAM_MspInit(SDRAM_HandleTypeDef *hsdram) {
 	__GPIOE_CLK_ENABLE();
 	__GPIOF_CLK_ENABLE();
 	__GPIOG_CLK_ENABLE();
+	__GPIOH_CLK_ENABLE();
 	/* Enable FMC clock */
 	__FMC_CLK_ENABLE();
 
@@ -319,10 +322,12 @@ void HAL_SDRAM_MspInit(SDRAM_HandleTypeDef *hsdram) {
 	 | PE14 <-> FMC_D11   | PF14 <-> FMC_A8    |
 	 | PE15 <-> FMC_D12   | PF15 <-> FMC_A9    |
 	 +-------------------+--------------------+--------------------+
-	 | PB5 <-> FMC_SDCKE1|
-	 | PB6 <-> FMC_SDNE1 |
-	 | PC0 <-> FMC_SDNWE |
+	 | PH7 <-> FMC_SDCKE1|
+	 | PH5 <-> FMC_SDNE1 |
+	 | PH6 <-> FMC_SDNWE |
 	 +-------------------+
+	 PG4 -> BA0
+	 PG5 -> BA1
 
 	 */
 
@@ -331,14 +336,6 @@ void HAL_SDRAM_MspInit(SDRAM_HandleTypeDef *hsdram) {
 	GPIO_Init_Structure.Speed = GPIO_SPEED_FAST;
 	GPIO_Init_Structure.Pull = GPIO_NOPULL;
 	GPIO_Init_Structure.Alternate = GPIO_AF12_FMC;
-
-	/* GPIOB configuration */
-	GPIO_Init_Structure.Pin = GPIO_PIN_5 | GPIO_PIN_6;
-	HAL_GPIO_Init(GPIOB, &GPIO_Init_Structure);
-
-	/* GPIOC configuration */
-	GPIO_Init_Structure.Pin = GPIO_PIN_0;
-	HAL_GPIO_Init(GPIOC, &GPIO_Init_Structure);
 
 	/* GPIOD configuration */
 	GPIO_Init_Structure.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_8 |
@@ -364,6 +361,10 @@ void HAL_SDRAM_MspInit(SDRAM_HandleTypeDef *hsdram) {
 	GPIO_Init_Structure.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_4 |
 	GPIO_PIN_5 | GPIO_PIN_8 | GPIO_PIN_15;
 	HAL_GPIO_Init(GPIOG, &GPIO_Init_Structure);
+
+	/* GPIOH configuration */
+	GPIO_Init_Structure.Pin = GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
+	HAL_GPIO_Init(GPIOH, &GPIO_Init_Structure);
 }
 #endif
 

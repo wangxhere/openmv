@@ -179,11 +179,11 @@ typedef enum {
 
 #else //OPENMV2
 /* LEDs */
-#define LED_PORT                (GPIOG)
-#define LED_IR_PIN              (GPIO_PIN_9)		/* PG9 is unused pin */
-#define LED_RED_PIN             (GPIO_PIN_14)		/* PG14 is red LED on Disco board */
-#define LED_GREEN_PIN           (GPIO_PIN_9)		/* PG9 is unused pin */
-#define LED_BLUE_PIN            (GPIO_PIN_13)		/* PG13 is green LED on Disco board */
+#define LED_PORT                (GPIOF)
+#define LED_IR_PIN              (GPIO_PIN_6)
+#define LED_RED_PIN             (GPIO_PIN_7)
+#define LED_GREEN_PIN           (GPIO_PIN_8)
+#define LED_BLUE_PIN            (GPIO_PIN_9)
 #define LED_ON(gpio)            (gpio.port->BSRRH = gpio.pin)
 #define LED_OFF(gpio)           (gpio.port->BSRRL = gpio.pin)
 
@@ -265,28 +265,28 @@ typedef enum {
 #define DCMI_TIM_CLK_DISABLE()  __TIM1_CLK_DISABLE()
 
 #define DCMI_RESET_PIN          (GPIO_PIN_9)
-#define DCMI_RESET_PORT         (GPIOG)
+#define DCMI_RESET_PORT         (GPIOF)
 
 #define DCMI_PWDN_PIN           (GPIO_PIN_10)
-#define DCMI_PWDN_PORT          (GPIOG)
+#define DCMI_PWDN_PORT          (GPIOF)
 
 #define DCMI_D0_PIN             (GPIO_PIN_6)
 #define DCMI_D1_PIN             (GPIO_PIN_7)
-#define DCMI_D2_PIN             (GPIO_PIN_0)
-#define DCMI_D3_PIN             (GPIO_PIN_1)
+#define DCMI_D2_PIN             (GPIO_PIN_8)
+#define DCMI_D3_PIN             (GPIO_PIN_9)
 #define DCMI_D4_PIN             (GPIO_PIN_11)
 #define DCMI_D5_PIN             (GPIO_PIN_3)
-#define DCMI_D6_PIN             (GPIO_PIN_5)
-#define DCMI_D7_PIN             (GPIO_PIN_6)
+#define DCMI_D6_PIN             (GPIO_PIN_6)
+#define DCMI_D7_PIN             (GPIO_PIN_7)
 
 #define DCMI_D0_PORT            (GPIOC)
 #define DCMI_D1_PORT            (GPIOC)
-#define DCMI_D2_PORT            (GPIOE)
-#define DCMI_D3_PORT            (GPIOE)
+#define DCMI_D2_PORT            (GPIOC)
+#define DCMI_D3_PORT            (GPIOC)
 #define DCMI_D4_PORT            (GPIOC)
 #define DCMI_D5_PORT            (GPIOD)
-#define DCMI_D6_PORT            (GPIOE)
-#define DCMI_D7_PORT            (GPIOE)
+#define DCMI_D6_PORT            (GPIOI)
+#define DCMI_D7_PORT            (GPIOI)
 
 #define DCMI_HSYNC_PIN          (GPIO_PIN_4)
 #define DCMI_VSYNC_PIN          (GPIO_PIN_7)

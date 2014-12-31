@@ -11,7 +11,7 @@
 ENTRY(Reset_Handler)
 
 /* WX: Debug SDRAM */
-#define DBG_SDRAM
+//#define DBG_SDRAM
 
 #ifdef OPENMV1
 #define HEAP_MEMORY     CCM
@@ -37,7 +37,7 @@ ENTRY(Reset_Handler)
 #define HEAP_MEMORY     SDRAM
 #endif
 #define FLASH_ORIGIN    0x08000000
-#define FLASH_LENGTH    2048K
+#define FLASH_LENGTH    1024K
 
 #define ISR_ORIGIN      0x08000000
 #define ISR_LENGTH      16K
