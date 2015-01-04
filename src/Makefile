@@ -315,23 +315,23 @@ OBJ += $(addprefix $(BUILD)/$(LWIP_DIR)/src/netif/, \
 
 #------------- FreeRTOS -------------------#
 	
-OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/CMSIS/RTOS/, \
-	cmsis.o									\
+OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/CMSIS_RTOS/, \
+	cmsis_os.o									\
 	)
 	
-OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/Portable/GCC//, \
+OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/portable/GCC/ARM_CM4F/, \
 	port.o									\
 	)
 	
-OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/Portable/GCC/MemMang/, \
+OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/portable/MemMang/, \
 	heap_4.o								\
 	)
 OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/, \
 	queue.o									\
-	task.o									\
+	tasks.o									\
 	croutine.o								\
 	list.o									\
-	timer.o									\
+	timers.o								\
 	)
 
 ###################################################
@@ -364,6 +364,7 @@ objs: | $(BUILD)
 	$(MAKE)  -C $(MICROPY_DIR)/stmhal BUILD=$(BUILD)/$(MICROPY_DIR) BOARD=$(TARGET)
 	$(MAKE)  -C $(OMV_DIR)            BUILD=$(BUILD)/$(OMV_DIR)
 	$(MAKE)  -C $(LWIP_DIR)			  BUILD=$(BUILD)/$(LWIP_DIR)
+	$(MAKE)  -C $(FREERTOS_DIR)		  BUILD=$(BUILD)/$(FREERTOS_DIR)
 
 $(BUILD)/$(BIN).elf: objs
 	$(CCP) -P -E -D$(TARGET) $(OMV_DIR)/stm32f4xx.ld.S > $(BUILD)/stm32f4xx.lds

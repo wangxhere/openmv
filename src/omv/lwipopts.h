@@ -49,26 +49,36 @@
  extern "C" {
 #endif
 
-/*----- Default Value for LWIP_DHCP: 0 -----*/  
-#define LWIP_DHCP   1
-/*----- Default Value for WITH_RTOS: 1 -----*/ 
-#define WITH_RTOS   0
-/*----- Default Value for NO_SYS: 0 -----*/ 
-#define NO_SYS   1			
-/*----- Default Value for MEM_ALIGNMENT: 1 -----*/ 
-#define MEM_ALIGNMENT   4
-/*----- Default Value for MEM_SIZE: 1600 -----*/
-#define MEM_SIZE   65536		
-/*----- Default Value for MEMP_NUM_SYS_TIMEOUT: 5 -----*/
-#define MEMP_NUM_SYS_TIMEOUT   6
-/*----- Default Value for LWIP_DNS: 0 -----*/
-#define LWIP_DNS   1
-/*----- Default Value for LWIP_NETCONN:  -----*/
-#define LWIP_NETCONN  0
-/*----- Default Value for LWIP_SOCKET:  -----*/
-#define LWIP_SOCKET   0
-/*----- No Default Value for LWIP_PROVIDE_ERRNO -----*/
-#define LWIP_PROVIDE_ERRNO  1
+ /*----- Default Value for LWIP_DHCP: 0 -----*/
+ #define LWIP_DHCP   1
+ /*----- Default Value for WITH_RTOS:  -----*/
+ #define WITH_RTOS   1
+ /*----- Default Value for NO_SYS: 0 -----*/
+ #define NO_SYS   0
+ /*----- Default Value for MEM_ALIGNMENT: 1 -----*/
+ #define MEM_ALIGNMENT   4
+ /*----- Default Value for LWIP_ETHERNET: 0 -----*/
+ #define LWIP_ETHERNET   1
+ /*----- Default Value for LWIP_NETCONN: 1 -----*/
+ #define LWIP_NETCONN   1
+ /*----- Default Value for LWIP_SOCKET: 1 -----*/
+ #define LWIP_SOCKET   1
+ /*----- Default Value for CHECKSUM_GEN_IP: 1 -----*/
+ #define CHECKSUM_GEN_IP   0
+ /*----- Default Value for CHECKSUM_GEN_UDP: 1 -----*/
+ #define CHECKSUM_GEN_UDP   0
+ /*----- Default Value for CHECKSUM_GEN_TCP: 1 -----*/
+ #define CHECKSUM_GEN_TCP   0
+ /*----- Default Value for CHECKSUM_GEN_ICMP: 1 -----*/
+ #define CHECKSUM_GEN_ICMP   0
+ /*----- Default Value for CHECKSUM_CHECK_IP: 1 -----*/
+ #define CHECKSUM_CHECK_IP   0
+ /*----- Default Value for CHECKSUM_CHECK_UDP: 1 -----*/
+ #define CHECKSUM_CHECK_UDP   0
+ /*----- Default Value for CHECKSUM_CHECK_TCP: 1 -----*/
+ #define CHECKSUM_CHECK_TCP   0
+ /*----- No Default Value for LWIP_PROVIDE_ERRNO -----*/
+ #define LWIP_PROVIDE_ERRNO  1
 /* USER CODE BEGIN 1 */
 /*----- Heap for LwIP -----*/
 extern	uint32_t				_lwip_heap_base;
