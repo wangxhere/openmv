@@ -17,9 +17,9 @@
  */
 
 #include <string.h>
-#include "cc3000_common.h"
-#include "socket.h"
+//#include "cc3000_common.h"
 #include "inet_pton.h"
+#include "../../lwip.bak/src/include/lwip/sockets.h"
 
 #define IN6ADDRSZ       16
 #define INADDRSZ         4

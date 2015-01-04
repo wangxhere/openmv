@@ -22,8 +22,10 @@ STHAL_DIR=sthal
 STUSB_DIR=stusb
 FATFS_DIR=fatfs
 MICROPY_DIR=micropython
-CC3K_DIR=cc3k
+#CC3K_DIR=cc3k
 OMV_DIR=omv
+LWIP_DIR=lwip
+FREERTOS_DIR=freertos
 
 # Target
 TARGET ?= OPENMV2
@@ -58,7 +60,7 @@ CFLAGS += -I$(TOP_DIR)/$(CMSIS_DIR)/include/
 CFLAGS += -I$(TOP_DIR)/$(CMSIS_DIR)/include/st
 CFLAGS += -I$(TOP_DIR)/$(STHAL_DIR)/include/
 CFLAGS += -I$(TOP_DIR)/$(FATFS_DIR)/include/
-CFLAGS += -I$(TOP_DIR)/$(CC3K_DIR)/include/
+#CFLAGS += -I$(TOP_DIR)/$(CC3K_DIR)/include/
 
 CFLAGS += -I$(BUILD)/$(MICROPY_DIR)/
 CFLAGS += -I$(TOP_DIR)/$(MICROPY_DIR)/py/
@@ -71,6 +73,22 @@ CFLAGS += -I$(TOP_DIR)/$(MICROPY_DIR)/stmhal/boards/$(TARGET)/
 CFLAGS += -I$(TOP_DIR)/$(OMV_DIR)/
 CFLAGS += -I$(TOP_DIR)/$(OMV_DIR)/py/
 CFLAGS += -I$(TOP_DIR)/$(OMV_DIR)/img/
+
+CFLAGS += -I$(TOP_DIR)/$(LWIP_DIR)/system/
+CFLAGS += -I$(TOP_DIR)/$(LWIP_DIR)/src/include/
+CFLAGS += -I$(TOP_DIR)/$(LWIP_DIR)/src/include/ipv4/
+CFLAGS += -I$(TOP_DIR)/$(LWIP_DIR)/system/arch/
+CFLAGS += -I$(TOP_DIR)/$(LWIP_DIR)/src/include/ipv4/lwip/
+CFLAGS += -I$(TOP_DIR)/$(LWIP_DIR)/src/include/lwip/
+CFLAGS += -I$(TOP_DIR)/$(LWIP_DIR)/src/include/netif/
+CFLAGS += -I$(TOP_DIR)/$(LWIP_DIR)/src/include/posix/
+CFLAGS += -I$(TOP_DIR)/$(LWIP_DIR)/src/include/posix/sys/
+CFLAGS += -I$(TOP_DIR)/$(LWIP_DIR)/src/netif/ppp/
+
+CFLAGS += -I$(TOP_DIR)/$(FREERTOS_DIR)/Source/portable/GCC/ARM_CM4F
+CFLAGS += -I$(TOP_DIR)/$(FREERTOS_DIR)/Source/include
+CFLAGS += -I$(TOP_DIR)/$(FREERTOS_DIR)/Source/CMSIS_RTOS
+
 
 # Linker Flags
 
@@ -89,7 +107,7 @@ OBJ += $(wildcard $(BUILD)/$(CMSIS_DIR)/src/dsp/MatrixFunctions/*.o)
 #OBJ += $(wildcard $(BUILD)/$(CMSIS_DIR)/src/dsp/SupportFunctions/*.o)
 #OBJ += $(wildcard $(BUILD)/$(CMSIS_DIR)/src/dsp/TransformFunctions/*.o)
 OBJ += $(wildcard $(BUILD)/$(STHAL_DIR)/src/*.o)
-OBJ += $(wildcard $(BUILD)/$(CC3K_DIR)/src/*.o)
+#OBJ += $(wildcard $(BUILD)/$(CC3K_DIR)/src/*.o)
 OBJ += $(wildcard $(BUILD)/$(FATFS_DIR)/src/*.o)
 OBJ += $(wildcard $(BUILD)/$(FATFS_DIR)/src/option/*.o)
 
@@ -149,9 +167,7 @@ OBJ += $(addprefix $(BUILD)/$(OMV_DIR)/py/, \
 	py_image.o                              \
 	py_time.o                               \
 	py_clock.o                              \
-	py_wlan.o                               \
 	py_socket.o                             \
-	py_select.o                             \
 	py_gpio.o                               \
 	py_spi.o                                \
 	uart.o                                  \
@@ -229,6 +245,94 @@ OBJ += $(addprefix $(BUILD)/$(MICROPY_DIR)/usbdev/, \
 	class/cdc_msc_hid/src/usbd_msc_scsi.o           \
 	class/cdc_msc_hid/src/usbd_msc_data.o           \
 	)
+	
+#------------- LwIP Library -------------------#
+OBJ += $(addprefix $(BUILD)/$(LWIP_DIR)/src/api/, \
+	api_lib.o								\
+	api_msg.o								\
+	err.o									\
+	netbuf.o								\
+	netdb.o									\
+	netifapi.o								\
+	sockets.o								\
+	tcpip.o									\
+	)
+OBJ += $(addprefix $(BUILD)/$(LWIP_DIR)/src/core/, \
+	def.o									\
+	dhcp.o									\
+	dns.o									\
+	init.o									\
+	lwip_timers.o							\
+	mem.o									\
+	memp.o									\
+	netif.o									\
+	pbuf.o									\
+	raw.o									\
+	stats.o									\
+	sys.o									\
+	tcp_in.o								\
+	tcp_out.o								\
+	tcp.o									\
+	udp.o									\
+	)
+#OBJ += $(addprefix $(BUILD)/$(LWIP_DIR)/src/core/snmp/, \
+#	asn1_dec.o								\
+#	asn1_enc.o								\
+#	mib_structs.o							\
+#	mib2.o									\
+#	msg_in.o								\
+#	msg_out.o								\
+#	)
+OBJ += $(addprefix $(BUILD)/$(LWIP_DIR)/src/core/ipv4/, \
+	autoip.o								\
+	icmp.o									\
+	igmp.o									\
+	inet.o									\
+	inet_chksum.o							\
+	ip_addr.o								\
+	ip_frag.o								\
+	ip.o									\
+	)
+OBJ += $(addprefix $(BUILD)/$(LWIP_DIR)/src/netif/, \
+	etharp.o								\
+	slipif.o								\
+	)
+#OBJ += $(addprefix $(BUILD)/$(LWIP_DIR)/src/netif/ppp/, \
+#	auth.o									\
+#	chap.o									\
+#	chpms.o									\
+#	fsm.o									\
+#	ipcp.o									\
+#	lcp.o									\
+#	magic.o									\
+#	md5.o									\
+#	pap.o									\
+#	ppp_oe.o								\
+#	ppp.o									\
+#	radm.o									\
+#	vj.o									\
+#	)
+
+#------------- FreeRTOS -------------------#
+	
+OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/CMSIS/RTOS/, \
+	cmsis.o									\
+	)
+	
+OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/Portable/GCC//, \
+	port.o									\
+	)
+	
+OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/Portable/GCC/MemMang/, \
+	heap_4.o								\
+	)
+OBJ += $(addprefix $(BUILD)/$(FREERTOS_DIR)/Source/, \
+	queue.o									\
+	task.o									\
+	croutine.o								\
+	list.o									\
+	timer.o									\
+	)
 
 ###################################################
 #Export Variables
@@ -256,9 +360,10 @@ objs: | $(BUILD)
 	$(MAKE)  -C $(CMSIS_DIR)          BUILD=$(BUILD)/$(CMSIS_DIR)
 	$(MAKE)  -C $(STHAL_DIR)          BUILD=$(BUILD)/$(STHAL_DIR)
 	$(MAKE)  -C $(FATFS_DIR)          BUILD=$(BUILD)/$(FATFS_DIR)
-	$(MAKE)  -C $(CC3K_DIR)           BUILD=$(BUILD)/$(CC3K_DIR)
+#	$(MAKE)  -C $(CC3K_DIR)           BUILD=$(BUILD)/$(CC3K_DIR)
 	$(MAKE)  -C $(MICROPY_DIR)/stmhal BUILD=$(BUILD)/$(MICROPY_DIR) BOARD=$(TARGET)
 	$(MAKE)  -C $(OMV_DIR)            BUILD=$(BUILD)/$(OMV_DIR)
+	$(MAKE)  -C $(LWIP_DIR)			  BUILD=$(BUILD)/$(LWIP_DIR)
 
 $(BUILD)/$(BIN).elf: objs
 	$(CCP) -P -E -D$(TARGET) $(OMV_DIR)/stm32f4xx.ld.S > $(BUILD)/stm32f4xx.lds

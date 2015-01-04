@@ -55,13 +55,20 @@ SRCS += $(addprefix py/,    \
 	py_image.c              \
 	py_time.c               \
 	py_clock.c              \
-	py_wlan.c               \
+	py_lwip.c               \
 	py_socket.c             \
-	py_select.c             \
 	py_gpio.c               \
 	py_spi.c                \
 	uart.c                  \
 	mlx90620.c              \
+   )
+
+#-- lwip --#
+SRCS += $(addprefix ,   \
+	lwip.c				\
+	ethernetif.c		\
+	inet_ntop.c			\
+	inet_pton.c			\
    )
 
 OBJS = $(addprefix $(BUILD)/, $(SRCS:.c=.o))

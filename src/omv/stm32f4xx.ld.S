@@ -82,8 +82,10 @@ _heap_size  = 0XB400;       /* required amount of heap */
 _stack_size = 0x1000;
 _heap_size = 0x10000;
 _cache_size = 0x4000;
+_lwip_heap_size = 64K;
 _heap_end = ORIGIN(HEAP_MEMORY) + _heap_size;
-_fb_base = _heap_end + _cache_size;
+_lwip_heap_base = _heap_end + _cache_size;
+_fb_base = _heap_end + _cache_size + _lwip_heap_size;
 
 #else	/* WX: Debug SDRAM */
 

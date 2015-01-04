@@ -46,7 +46,7 @@
 #include "py_sensor.h"
 #include "py_image.h"
 #include "py_file.h"
-#include "py_wlan.h"
+#include "py_lwip.h"
 #include "py_socket.h"
 #include "py_select.h"
 #include "py_gpio.h"
@@ -101,6 +101,7 @@ static const module_t init_modules[] ={
     {"sensor",  py_sensor_init},
     {"led",     py_led_init},
     {"time",    py_time_init},
+	{"lwip",    py_lwip_init},
 //  {"wlan",    py_wlan_init},
 //  {"socket",  py_socket_init},
 //  {"select",  py_select_init},
